@@ -48,7 +48,7 @@ Parameters:
 
   CodeBuildDockerImage:
     Type: String
-    Default: aws/codebuild/standard:4.0
+    Default: aws/codebuild/docker:17.09.0
     Description: AWS CodeBuild Docker optimized image
     MinLength: 3
     MaxLength: 100
@@ -155,7 +155,7 @@ Resources:
               response['Data'] = {"Message": "Resource creation failed"}
 
             response_body = json.dumps(response)
-            headers = {'content-type': '', "content-length": len(response_body) }
+            headers = {'content-type': '', "content-length": str(len(response_body)) }
             put_response = requests.put(event['ResponseURL'], headers=headers, data=response_body)
             return response
 
