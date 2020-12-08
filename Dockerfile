@@ -1,17 +1,9 @@
-#!/usr/bin/env python
 FROM python:stretch
-#FROM debian:9
 
-
-RUN pip install  pyjwt
-RUN pip install flask
-RUN pip install gunicorn
-RUN pip install pytest
-
-
-
-ADD . /app/
+COPY . /app
 WORKDIR /app
 
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
 
-ENTRYPOINT ["gunicorn","-b", ":8080","main:APP"]
+ENTRYPOINT ["gunicorn"  , "-b", ":8080", "main:APP"]
